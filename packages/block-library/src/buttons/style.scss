@@ -1,7 +1,15 @@
-.wp-block-buttons .wp-block-button {
-	display: inline-block;
-	margin: $grid-unit-05;
-}
-.wp-block-buttons.aligncenter {
-	text-align: center;
+.wp-block-buttons {
+
+	&.aligncenter {
+		text-align: center;
+	}
+
+	.wp-block-button {
+		display: inline-block;
+		margin: $grid-unit-05;
+	}
+
+	&.is-style-vertical .wp-block-button {
+		display: block;
+	}
 }
