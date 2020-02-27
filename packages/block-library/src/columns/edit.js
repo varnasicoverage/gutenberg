@@ -82,14 +82,18 @@ function ColumnsEditContainer( {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<InnerBlocks
-				allowedBlocks={ ALLOWED_BLOCKS }
-				__experimentalMoverDirection="horizontal"
-				__experimentalTagName={ Block.div }
-				__experimentalPassedProps={ {
-					className: classes,
-				} }
-			/>
+			{ InspectorControlsColorPanel }
+			<BackgroundColor>
+				<TextColor>
+					<div className={ classes } ref={ ref }>
+						<InnerBlocks
+							allowedBlocks={ ALLOWED_BLOCKS }
+							__experimentalMoverDirection="horizontal"
+							renderAppender={ false }
+						/>
+					</div>
+				</TextColor>
+			</BackgroundColor>
 		</>
 	);
 }
