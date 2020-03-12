@@ -59,6 +59,7 @@ const typescriptUtilityTypes = [
 	'Required',
 	'ReturnType',
 	'ThisType',
+	'AsyncIterableIterator',
 ];
 
 module.exports = {
