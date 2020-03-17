@@ -8,7 +8,7 @@ import { map } from 'lodash';
  */
 import { useMemo, useCallback } from '@wordpress/element';
 import { parse, cloneBlock } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useDispatch } from '@wordpress/data';
 import { ENTER, SPACE } from '@wordpress/keycodes';
 import { __, sprintf } from '@wordpress/i18n';
 
@@ -23,7 +23,7 @@ function BlockPattern( { pattern, onClick } ) {
 
 	return (
 		<div
-			className="block-editor-patterns__item"
+			className="block-editor-inserter__patterns-item"
 			role="button"
 			onClick={ () => onClick( pattern, blocks ) }
 			onKeyDown={ ( event ) => {
@@ -33,28 +33,20 @@ function BlockPattern( { pattern, onClick } ) {
 			} }
 			tabIndex={ 0 }
 		>
-			<div className="block-editor-patterns__item-preview">
-				<BlockPreview blocks={ blocks } viewportWidth={ 800 } />
+			<div className="block-editor-inserter__patterns-item-preview">
+				<BlockPreview blocks={ blocks } autoHeight />
 			</div>
-			<div className="block-editor-patterns__item-title">{ title }</div>
+			<div className="block-editor-inserter__patterns-item-title">
+				{ title }
+			</div>
 		</div>
 	);
 }
 
-function BlockPatterns( { patterns } ) {
-	const getBlockInsertionPoint = useSelect( ( select ) => {
-		return select( 'core/block-editor' ).getBlockInsertionPoint;
-	} );
-	const { insertBlocks } = useDispatch( 'core/block-editor' );
+function BlockPatterns( { patterns, onInsert } ) {
 	const { createSuccessNotice } = useDispatch( 'core/notices' );
 	const onClickPattern = useCallback( ( pattern, blocks ) => {
-		const { index, rootClientId } = getBlockInsertionPoint();
-		insertBlocks(
-			map( blocks, ( block ) => cloneBlock( block ) ),
-			index,
-			rootClientId,
-			false
-		);
+		onInsert( map( blocks, ( block ) => cloneBlock( block ) ) );
 		createSuccessNotice(
 			sprintf(
 				/* translators: %s: block pattern title. */
@@ -68,10 +60,10 @@ function BlockPatterns( { patterns } ) {
 	}, [] );
 
 	return (
-		<div className="block-editor-patterns">
-			{ patterns.map( ( pattern, index ) => (
+		<div className="block-editor-inserter__patterns">
+			{ patterns.map( ( pattern, patternIndex ) => (
 				<BlockPattern
-					key={ index }
+					key={ patternIndex }
 					pattern={ pattern }
 					onClick={ onClickPattern }
 				/>
