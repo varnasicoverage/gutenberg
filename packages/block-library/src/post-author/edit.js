@@ -2,11 +2,12 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import { invoke } from 'lodash';
 /**
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect, useState } from '@wordpress/element';
 import { useEntityProp } from '@wordpress/core-data';
 import {
 	AlignmentToolbar,
@@ -33,7 +34,9 @@ function PostAuthorDisplay( { props, author, authors } ) {
 
 	const { editPost } = useDispatch( 'core/editor' );
 
-	const { fontSize, setFontSize } = props;
+	const [ authorId, setAuthorId ] = useState( props.attributes.id );
+
+	const { isSelected, fontSize, setFontSize } = props;
 	const {
 		TextColor,
 		BackgroundColor,
@@ -68,21 +71,28 @@ function PostAuthorDisplay( { props, author, authors } ) {
 		{ value: 96, label: __( 'Large' ) },
 	];
 
-	const changeAuthor = ( authorId ) => {
-		apiFetch( { path: '/wp/v2/users/' + authorId + '?context=edit' } ).then(
-			( newAuthor ) => {
+	useEffect( () => {
+		if ( authorId !== id ) {
+			const authorFetch = apiFetch( {
+				path: '/wp/v2/users/' + authorId + '?context=edit',
+			} );
+			authorFetch.then( ( newAuthor ) => {
 				editPost( { author: Number( authorId ) } );
 				props.setAttributes( {
 					id: newAuthor.id,
 					name: newAuthor.name,
-					avatarSize: props.attributes.avatarSize,
 					avatarUrl:
 						newAuthor.avatar_urls[ props.attributes.avatarSize ],
 					description: newAuthor.description,
 				} );
-			}
-		);
-	};
+			} );
+			return () => {
+				if ( authorFetch ) {
+					invoke( authorFetch, [ 'abort' ] );
+				}
+			};
+		}
+	}, [ authorId ] );
 
 	const blockClassNames = classnames( 'wp-block-post-author', {
 		[ fontSize.class ]: fontSize.class,
@@ -91,7 +101,6 @@ function PostAuthorDisplay( { props, author, authors } ) {
 		fontSize: fontSize.size ? fontSize.size + 'px' : undefined,
 	};
 
-	const { isSelected } = props;
 	return (
 		<>
 			<InspectorControls>
@@ -105,8 +114,8 @@ function PostAuthorDisplay( { props, author, authors } ) {
 								label: theAuthor.name,
 							};
 						} ) }
-						onChange={ ( authorID ) => {
-							changeAuthor( authorID );
+						onChange={ ( newAuthorId ) => {
+							setAuthorId( newAuthorId );
 						} }
 					/>
 					<ToggleControl
