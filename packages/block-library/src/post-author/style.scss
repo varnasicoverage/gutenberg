@@ -6,7 +6,8 @@
 	&__byline {
 		width: 100%;
 		margin-top: 0;
-		margin-bottom: $grid-unit-20;
+		margin-bottom: 0;
+		font-size: 0.8em;
 	}
 
 	&__avatar {
@@ -14,7 +15,7 @@
 	}
 
 	&__bio {
-		margin-top: $grid-unit-20;
+		margin-top: $grid-unit-10;
 	}
 
 	&__content {

@@ -92,6 +92,11 @@ function post_author_build_css_font_sizes( $attributes ) {
  * @return string Returns the rendered author block.
  */
 function render_block_core_post_author( $attributes ) {
+
+	if ( 0 === count( $attributes ) ) {
+		return '';
+	}
+
 	$post = gutenberg_get_post_from_context();
 
 	if ( ! $post ) {
@@ -106,10 +111,6 @@ function render_block_core_post_author( $attributes ) {
 	$has_first_or_last_name = ! empty( $attributes['firstName'] ) || ! empty( $attributes['lastName'] );
 
 	$author_name = $attributes['name'];
-	if ( $attributes['showDisplayName'] && $has_first_or_last_name ) {
-		$author_name = $attributes['firstName'] . ' ' . $attributes['lastName'];
-	}
-
 	$byline = ! empty( $attributes['byline'] ) ? $attributes['byline'] : __( 'Written by:' );
 
 	$colors     = post_author_build_css_colors( $attributes );
@@ -129,9 +130,9 @@ function render_block_core_post_author( $attributes ) {
 		: '';
 
 	return sprintf( '<div %1$s %2$s>', $class_attribute, $style_attribute ) .
-		( ! empty( $byline ) ? '<p class="wp-block-post-author__byline">' . $byline . '</p>' : '' ) .
 		( $attributes['showAvatar'] ? '<div class="wp-block-post-author__avatar">' . $avatar . '</div>' : '' ) .
 		'<div class="wp-block-post-author__content">' .
+			( ! empty( $byline ) ? '<p class="wp-block-post-author__byline">' . $byline . '</p>' : '' ) .
 			'<p class="wp-block-post-author__name">' . $author_name . '</p>' .
 			( $attributes['showBio'] ? '<p class="wp-block-post-author__bio">' . $attributes['description'] . '</p>' : '' ) .
 		'</div>' .
