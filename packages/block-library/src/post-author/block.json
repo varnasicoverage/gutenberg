@@ -12,13 +12,10 @@
 			"type": "string"
 		},
 		"avatarSize": {
-			"type": "string"
+			"type": "number"
 		},
 		"avatarUrl": {
-			"type": "string",
-			"source": "attribute",
-			"selector": "img",
-			"attribute": "src"
+			"type": "string"
 		},
 		"showAvatar": {
 			"type": "boolean"

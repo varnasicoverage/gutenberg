@@ -19,7 +19,7 @@ import {
 	withFontSizes,
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -29,12 +29,21 @@ import BlockColorsStyleSelector from './block-colors-selector';
 
 const DEFAULT_AVATAR_SIZE = 24;
 
-function PostAuthorDisplay( { props, author, authors } ) {
+function PostAuthorDisplay( { props, postAuthorId } ) {
 	const ref = useRef();
 
-	const { editPost } = useDispatch( 'core/editor' );
-
 	const [ authorId, setAuthorId ] = useState( props.attributes.id );
+
+	const { author, authors } = useSelect(
+		( select ) => {
+			const { getEntityRecord, getAuthors } = select( 'core' );
+			return {
+				author: getEntityRecord( 'root', 'user', postAuthorId ),
+				authors: getAuthors(),
+			};
+		},
+		[ postAuthorId ]
+	);
 
 	const { isSelected, fontSize, setFontSize } = props;
 	const {
@@ -71,13 +80,24 @@ function PostAuthorDisplay( { props, author, authors } ) {
 		{ value: 96, label: __( 'Large' ) },
 	];
 
+	let avatarSize = DEFAULT_AVATAR_SIZE;
+	if ( !! props.attributes.avatarSize ) {
+		avatarSize = props.attributes.avatarSize;
+	}
 	useEffect( () => {
-		if ( authorId !== id ) {
+		if ( author && ! props.attributes.id ) {
+			props.setAttributes( {
+				id: Number( author.id ),
+				name: author.name,
+				description: author.description,
+				avatarSize,
+				avatarUrl: author.avatar_urls[ avatarSize ],
+			} );
+		} else if ( authorId ) {
 			const authorFetch = apiFetch( {
 				path: '/wp/v2/users/' + authorId + '?context=edit',
 			} );
 			authorFetch.then( ( newAuthor ) => {
-				editPost( { author: Number( authorId ) } );
 				props.setAttributes( {
 					id: newAuthor.id,
 					name: newAuthor.name,
@@ -92,7 +112,7 @@ function PostAuthorDisplay( { props, author, authors } ) {
 				}
 			};
 		}
-	}, [ authorId ] );
+	}, [ authorId, author ] );
 
 	const blockClassNames = classnames( 'wp-block-post-author', {
 		[ fontSize.class ]: fontSize.class,
@@ -133,7 +153,6 @@ function PostAuthorDisplay( { props, author, authors } ) {
 							onChange={ ( size ) => {
 								props.setAttributes( {
 									avatarSize: size,
-									avatarUrl: author.avatar_urls[ size ],
 								} );
 							} }
 						/>
@@ -225,48 +244,12 @@ function PostAuthorDisplay( { props, author, authors } ) {
 }
 
 function PostAuthorEdit( props ) {
-	let [ authorId ] = useEntityProp( 'postType', 'post', 'author' );
-
-	if ( !! props.attributes.id ) {
-		authorId = props.attributes.id;
-	}
-
-	const { author, authors } = useSelect(
-		( select ) => {
-			const { getEntityRecord, getAuthors } = select( 'core' );
-			return {
-				author: getEntityRecord( 'root', 'user', authorId ),
-				authors: getAuthors(),
-			};
-		},
-		[ authorId ]
-	);
-
-	if ( ! author ) {
+	const [ postAuthorId ] = useEntityProp( 'postType', 'post', 'author' );
+	if ( ! postAuthorId ) {
 		return 'Post Author Placeholder';
 	}
 
-	let avatarSize = DEFAULT_AVATAR_SIZE;
-	if ( !! props.attributes.avatarSize ) {
-		avatarSize = props.attributes.avatarSize;
-	}
-
-	const { setAttributes } = props;
-	setAttributes( {
-		id: Number( author.id ),
-		name: author.name,
-		description: author.description,
-		avatarSize,
-		avatarUrl: author.avatar_urls[ avatarSize ],
-	} );
-
-	return (
-		<PostAuthorDisplay
-			props={ props }
-			author={ author }
-			authors={ authors }
-		/>
-	);
+	return <PostAuthorDisplay postAuthorId={ postAuthorId } props={ props } />;
 }
 
 export default withFontSizes( 'fontSize' )( PostAuthorEdit );
