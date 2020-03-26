@@ -108,10 +108,8 @@ function render_block_core_post_author( $attributes ) {
 		$attributes['avatarSize']
 	);
 
-	$has_first_or_last_name = ! empty( $attributes['firstName'] ) || ! empty( $attributes['lastName'] );
-
 	$author_name = $attributes['name'];
-	$byline = ! empty( $attributes['byline'] ) ? $attributes['byline'] : __( 'Written by:' );
+	$byline      = ! empty( $attributes['byline'] ) ? $attributes['byline'] : __( 'Written by:' );
 
 	$colors     = post_author_build_css_colors( $attributes );
 	$font_sizes = post_author_build_css_font_sizes( $attributes );
