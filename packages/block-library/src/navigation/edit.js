@@ -7,13 +7,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import {
-	useMemo,
-	useState,
-	Fragment,
-	useRef,
-	useEffect,
-} from '@wordpress/element';
+import { useMemo, useState, useRef, useEffect } from '@wordpress/element';
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -282,7 +276,7 @@ function Navigation( {
 
 	// UI State: rendered Block UI
 	return (
-		<Fragment>
+		<>
 			<BlockControls>
 				<Toolbar
 					icon={
@@ -380,7 +374,7 @@ function Navigation( {
 					</Block.nav>
 				</BackgroundColor>
 			</TextColor>
-		</Fragment>
+		</>
 	);
 }
 
