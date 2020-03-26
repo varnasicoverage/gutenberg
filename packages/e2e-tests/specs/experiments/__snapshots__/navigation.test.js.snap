@@ -32,14 +32,6 @@ exports[`Navigation Creating from existing Menus creates an empty navigation blo
 
 exports[`Navigation Creating from existing Menus does not display option to create from existing menus if there are no menus 1`] = `"<!-- wp:navigation /-->"`;
 
-exports[`Navigation allows a navigation block to be created from an empty menu using a mixture of internal and external links 1`] = `
-"<!-- wp:navigation -->
-<!-- wp:navigation-link {\\"label\\":\\"WP\\",\\"id\\":\\"https://wordpress.org\\",\\"url\\":\\"https://wordpress.org\\"} /-->
-
-<!-- wp:navigation-link {\\"label\\":\\"Contact\\",\\"id\\":1,\\"url\\":\\"https://this/is/a/test/search/get-in-touch\\"} /-->
-<!-- /wp:navigation -->"
-`;
-
 exports[`Navigation allows a navigation block to be created using existing pages 1`] = `
 "<!-- wp:navigation -->
 <!-- wp:navigation-link {\\"label\\":\\"Home\\",\\"type\\":\\"page\\",\\"id\\":1,\\"url\\":\\"https://this/is/a/test/page/home\\"} /-->
@@ -47,6 +39,14 @@ exports[`Navigation allows a navigation block to be created using existing pages
 <!-- wp:navigation-link {\\"label\\":\\"About\\",\\"type\\":\\"page\\",\\"id\\":2,\\"url\\":\\"https://this/is/a/test/page/about\\"} /-->
 
 <!-- wp:navigation-link {\\"label\\":\\"Contact Us\\",\\"type\\":\\"page\\",\\"id\\":3,\\"url\\":\\"https://this/is/a/test/page/contact\\"} /-->
+<!-- /wp:navigation -->"
+`;
+
+exports[`Navigation allows an empty navigation block to be created and manually populated using a mixture of internal and external links 1`] = `
+"<!-- wp:navigation -->
+<!-- wp:navigation-link {\\"label\\":\\"WP\\",\\"id\\":\\"https://wordpress.org\\",\\"url\\":\\"https://wordpress.org\\"} /-->
+
+<!-- wp:navigation-link {\\"label\\":\\"Contact\\",\\"id\\":1,\\"url\\":\\"https://this/is/a/test/search/get-in-touch\\"} /-->
 <!-- /wp:navigation -->"
 `;
 

@@ -328,7 +328,7 @@ describe( 'Navigation', () => {
 		} );
 	} );
 
-	it( 'allows a navigation block to be created from an empty menu using a mixture of internal and external links', async () => {
+	it( 'allows an empty navigation block to be created and manually populated using a mixture of internal and external links', async () => {
 		// Add the navigation block.
 		await insertBlock( 'Navigation' );
 
