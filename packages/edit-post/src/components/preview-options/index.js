@@ -12,24 +12,11 @@ import {
 	Icon,
 	MenuGroup,
 	MenuItem,
-	Path,
-	SVG,
 } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { PostPreviewButton } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
 import { external, check } from '@wordpress/icons';
-
-const downArrow = (
-	<SVG
-		width="24"
-		height="24"
-		xmlns="http://www.w3.org/2000/svg"
-		viewBox="0 0 24 24"
-	>
-		<Path d="M12.3 16.1l-5.8-5.6 1-1 4.7 4.4 4.3-4.4 1 1z" />
-	</SVG>
-);
 
 export default function PreviewOptions( {
 	forceIsAutosaveable,
@@ -67,7 +54,6 @@ export default function PreviewOptions( {
 					disabled={ ! isSaveable }
 				>
 					{ __( 'Preview' ) }
-					{ downArrow }
 				</Button>
 			) }
 			renderContent={ () => (
