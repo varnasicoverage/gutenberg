@@ -317,6 +317,14 @@ _Returns_
 
 -   `Object`: Font size object.
 
+<a name="getGradientSlugByValue" href="#getGradientSlugByValue">#</a> **getGradientSlugByValue**
+
+Undocumented declaration.
+
+<a name="getGradientValueBySlug" href="#getGradientValueBySlug">#</a> **getGradientValueBySlug**
+
+Undocumented declaration.
+
 <a name="InnerBlocks" href="#InnerBlocks">#</a> **InnerBlocks**
 
 _Related_
