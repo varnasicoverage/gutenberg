@@ -21,7 +21,7 @@ export function __experimentalGetGradientClass( gradientSlug ) {
 	return `has-${ gradientSlug }-gradient-background`;
 }
 
-function getGradientValueBySlug( gradients, slug ) {
+export function getGradientValueBySlug( gradients, slug ) {
 	const gradient = find( gradients, [ 'slug', slug ] );
 	return gradient && gradient.gradient;
 }
@@ -34,7 +34,7 @@ export function __experimentalGetGradientObjectByGradientValue(
 	return gradient;
 }
 
-function getGradientSlugByValue( gradients, value ) {
+export function getGradientSlugByValue( gradients, value ) {
 	const gradient = __experimentalGetGradientObjectByGradientValue(
 		gradients,
 		value
