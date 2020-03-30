@@ -2,7 +2,7 @@
  * External dependencies
  */
 import initStoryshots, {
-	snapshotWithOptions,
+	multiSnapshotWithOptions,
 } from '@storybook/addon-storyshots';
 import path from 'path';
 
@@ -25,7 +25,8 @@ afterAll( () => {
 
 initStoryshots( {
 	configPath: path.resolve( __dirname, '../' ),
-	test: snapshotWithOptions( ( story ) => ( {
+	integrityOptions: { cwd: __dirname }, // it will start searching from the current directory
+	test: multiSnapshotWithOptions( ( story ) => ( {
 		// We need to mock refs for some stories which use them.
 		// @see https://reactjs.org/blog/2016/11/16/react-v15.4.0.html#mocking-refs-for-snapshot-testing
 		// @see https://github.com/storybookjs/storybook/tree/master/addons/storyshots/storyshots-core#using-createnodemock-to-mock-refs
