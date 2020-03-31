@@ -16,9 +16,13 @@ import {
 	SVG,
 } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
-import { PostPreviewButton } from '@wordpress/editor';
 import { __ } from '@wordpress/i18n';
 import { external, check } from '@wordpress/icons';
+
+/**
+ * Internal dependencies
+ */
+import { PostPreviewButton } from '../post-preview-button';
 
 const downArrow = (
 	<SVG
