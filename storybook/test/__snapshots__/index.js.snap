@@ -2598,16 +2598,6 @@ exports[`Storyshots Components/CustomSelectControl Default 1`] = `
       />
     </svg>
   </button>
-  <ul
-    aria-labelledby="downshift-null-label"
-    className="components-custom-select-control__menu"
-    id="downshift-null-menu"
-    onBlur={[Function]}
-    onKeyDown={[Function]}
-    onMouseLeave={[Function]}
-    role="listbox"
-    tabIndex={-1}
-  />
 </div>
 `;
 
@@ -2920,16 +2910,6 @@ exports[`Storyshots Components/FontSizePicker Default 1`] = `
           />
         </svg>
       </button>
-      <ul
-        aria-labelledby="downshift-null-label"
-        className="components-custom-select-control__menu"
-        id="downshift-null-menu"
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onMouseLeave={[Function]}
-        role="listbox"
-        tabIndex={-1}
-      />
     </div>
     <div
       className="components-font-size-picker__number-container"
@@ -3211,16 +3191,6 @@ input[type='number'].emotion-18 {
           />
         </svg>
       </button>
-      <ul
-        aria-labelledby="downshift-null-label"
-        className="components-custom-select-control__menu"
-        id="downshift-null-menu"
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onMouseLeave={[Function]}
-        role="listbox"
-        tabIndex={-1}
-      />
     </div>
     <button
       className="components-button components-color-palette__clear is-secondary is-small"
@@ -3410,16 +3380,6 @@ exports[`Storyshots Components/FontSizePicker Without Custom Sizes 1`] = `
           />
         </svg>
       </button>
-      <ul
-        aria-labelledby="downshift-null-label"
-        className="components-custom-select-control__menu"
-        id="downshift-null-menu"
-        onBlur={[Function]}
-        onKeyDown={[Function]}
-        onMouseLeave={[Function]}
-        role="listbox"
-        tabIndex={-1}
-      />
     </div>
     <button
       className="components-button components-color-palette__clear is-secondary is-small"
