@@ -1,19 +1,7 @@
 /**
  * External dependencies
- *
- * @format
  */
-
-/**
- * External dependencies
- */
-import { AppRegistry, I18nManager } from 'react-native';
-import { Component } from '@wordpress/element';
-
-/**
- * WordPress dependencies
- */
-import { setLocaleData } from '@wordpress/i18n';
+import {AppRegistry, I18nManager} from 'react-native';
 
 /**
  * Internal dependencies
@@ -23,6 +11,14 @@ import { getTranslation } from '../i18n-cache';
 import initialHtml from './initial-html';
 import setupApiFetch from './api-fetch-setup';
 
+const reactNativeSetup  = () => {
+	// Disable warnings as they disrupt the user experience in dev mode
+	// eslint-disable-next-line no-console
+	console.disableYellowBox = true;
+
+	I18nManager.forceRTL( false ); // Change to `true` to debug RTL layout easily.
+};
+
 const gutenbergSetup = () => {
 	const wpData = require( '@wordpress/data' );
 
@@ -30,9 +26,49 @@ const gutenbergSetup = () => {
 	const userId = 1;
 	const storageKey = 'WP_DATA_USER_' + userId;
 	wpData.use( wpData.plugins.persistence, { storageKey } );
+
+	setupInitHooks();
+
+	const initializeEditor = require( '@wordpress/edit-post' ).initializeEditor;
+	return initializeEditor( {
+		initialHtml,
+		initialHtmlModeEnabled: false,
+		initialTitle: 'Welcome to Gutenberg!',
+		postType: 'post'
+	} );
+};
+
+const setupInitHooks = () => {
+	const wpHooks = require( '@wordpress/hooks' );
+
+	wpHooks.doAction( 'native.setup-init-hooks' );
+
+	wpHooks.addAction( 'native.init', 'core/react-native-editor', ( props ) => {
+		setupLocale( 'fr', props.translations );
+		setupApiFetch();
+
+		const isHermes = () => global.HermesInternal !== null;
+		// eslint-disable-next-line no-console
+		console.log( 'Hermes is: ' + isHermes() );
+	} );
+
+	// Map native props to Editor props
+	wpHooks.addFilter(  'native.block_editor_props', 'core/react-native-editor', ( {
+		initialData,
+		initialTitle,
+		initialHtmlModeEnabled,
+		postType,
+	} ) => ( {
+		initialHtml: initialData,
+		initialHtmlModeEnabled,
+		initialTitle,
+		postType,
+	} ) );
 };
 
 const setupLocale = ( locale, extraTranslations ) => {
+	const setLocaleData = require( '@wordpress/i18n' ).setLocaleData;
+
 	I18nManager.forceRTL( false ); // Change to `true` to debug RTL layout easily.
 
 	let gutenbergTranslations = getTranslation( locale );
@@ -50,51 +86,6 @@ const setupLocale = ( locale, extraTranslations ) => {
 	}
 };
 
-export class RootComponent extends Component {
-	constructor( props ) {
-		super( props );
-		setupLocale( props.locale, props.translations );
-		setupApiFetch();
-		require( '@wordpress/edit-post' ).initializeEditor();
+reactNativeSetup();
 
-		const isHermes = () => global.HermesInternal !== null;
-		// eslint-disable-next-line no-console
-		console.log( 'Hermes is: ' + isHermes() );
-	}
-
-	render() {
-		const { initialHtmlModeEnabled } = this.props;
-		let initialData = this.props.initialData;
-		let initialTitle = this.props.initialTitle;
-		let postType = this.props.postType;
-
-		if ( initialData === undefined && __DEV__ ) {
-			initialData = initialHtml;
-		}
-		if ( initialTitle === undefined ) {
-			initialTitle = 'Welcome to Gutenberg!';
-		}
-		if ( postType === undefined ) {
-			postType = 'post';
-		}
-		const Editor = require( '@wordpress/edit-post' ).Editor;
-		return (
-			<Editor
-				initialHtml={ initialData }
-				initialHtmlModeEnabled={ initialHtmlModeEnabled }
-				initialTitle={ initialTitle }
-				postType={ postType }
-			/>
-		);
-	}
-}
-
-export function registerApp() {
-	// Disable warnings as they disrupt the user experience in dev mode
-	// eslint-disable-next-line no-console
-	console.disableYellowBox = true;
-
-	gutenbergSetup();
-
-	AppRegistry.registerComponent( 'gutenberg', () => RootComponent );
-}
+AppRegistry.registerComponent( 'gutenberg', gutenbergSetup );
