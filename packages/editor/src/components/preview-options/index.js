@@ -41,10 +41,10 @@ export default function PreviewOptions( {
 } ) {
 	const {
 		__experimentalSetPreviewDeviceType: setPreviewDeviceType,
-	} = useDispatch( 'core/edit-post' );
+	} = useDispatch( 'core/editor' );
 
 	const deviceType = useSelect( ( select ) => {
-		return select( 'core/edit-post' ).__experimentalGetPreviewDeviceType();
+		return select( 'core/editor' ).__experimentalGetPreviewDeviceType();
 	}, [] );
 
 	const isSaveable = useSelect( ( select ) => {
