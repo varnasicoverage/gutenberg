@@ -46,9 +46,7 @@ const render = ( element ) => ( propsFromNative ) => {
 };
 
 /**
- * Renders a given element into the target DOM node.
- *
+ * Returns a componentProvider that can be registered with `AppRegistry.registerComponent`
  * @param {WPElement}   element Element to render.
- * @param {HTMLElement} target  DOM node into which element should be rendered.
  */
 export { render };
