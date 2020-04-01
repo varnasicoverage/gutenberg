@@ -29,18 +29,7 @@ const render = ( element ) => ( propsFromNative ) => {
 	}
 
 	// Otherwise overwrite the existing props using a filter hook
-	let filteredProps = null;
-
-	useEffect( () => {
-		filteredProps = applyFilters(
-			'native.block_editor_props',
-			propsFromNative
-		);
-	}, [ propsFromNative ] );
-
-	if ( ! filteredProps ) {
-		return null;
-	}
+	const filteredProps = applyFilters( 'native.block_editor_props', propsFromNative );
 
 	return cloneElement( element, filteredProps );
 };
