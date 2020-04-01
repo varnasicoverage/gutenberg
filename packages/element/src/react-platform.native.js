@@ -11,16 +11,10 @@ import { applyFilters, doAction } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import { cloneElement, useEffect } from './react';
+import { cloneElement } from './react';
 
 const render = ( element ) => ( propsFromNative ) => {
-	useEffect( () => {
-		doAction( 'native.init', propsFromNative );
-	}, [] );
-
-	useEffect( () => {
-		doAction( 'native.render', propsFromNative );
-	} );
+	doAction( 'native.render', propsFromNative );
 
 	// if we have not received props from a parent native app
 	// just render the element as it is
@@ -29,13 +23,18 @@ const render = ( element ) => ( propsFromNative ) => {
 	}
 
 	// Otherwise overwrite the existing props using a filter hook
-	const filteredProps = applyFilters( 'native.block_editor_props', propsFromNative );
+	const filteredProps = applyFilters(
+		'native.block_editor_props',
+		propsFromNative
+	);
 
 	return cloneElement( element, filteredProps );
 };
 
 /**
- * Returns a componentProvider that can be registered with `AppRegistry.registerComponent`
+ * Render a given element on Native.
+ * This actually returns a componentProvider that can be registered with `AppRegistry.registerComponent`
+ *
  * @param {WPElement}   element Element to render.
  */
 export { render };

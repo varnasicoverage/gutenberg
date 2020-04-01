@@ -27,6 +27,12 @@ const gutenbergSetup = () => {
 	const storageKey = 'WP_DATA_USER_' + userId;
 	wpData.use( wpData.plugins.persistence, { storageKey } );
 
+	setupApiFetch();
+
+	const isHermes = () => global.HermesInternal !== null;
+	// eslint-disable-next-line no-console
+	console.log( 'Hermes is: ' + isHermes() );
+
 	setupInitHooks();
 
 	const initializeEditor = require( '@wordpress/edit-post' ).initializeEditor;
@@ -43,13 +49,8 @@ const setupInitHooks = () => {
 
 	wpHooks.doAction( 'native.setup-init-hooks' );
 
-	wpHooks.addAction( 'native.init', 'core/react-native-editor', ( props ) => {
-		setupLocale( 'fr', props.translations );
-		setupApiFetch();
-
-		const isHermes = () => global.HermesInternal !== null;
-		// eslint-disable-next-line no-console
-		console.log( 'Hermes is: ' + isHermes() );
+	wpHooks.addAction( 'native.render', 'core/react-native-editor', ( props ) => {
+		setupLocale( props.locale, props.translations );
 	} );
 
 	// Map native props to Editor props
