@@ -4,6 +4,7 @@
 import {
 	PostTitle,
 	VisualEditorGlobalKeyboardShortcuts,
+	__experimentalUseResizeCanvas,
 } from '@wordpress/editor';
 import {
 	WritingFlow,
@@ -21,10 +22,9 @@ import { Popover } from '@wordpress/components';
  * Internal dependencies
  */
 import BlockInspectorButton from './block-inspector-button';
-import { useResizeCanvas } from '../resize-canvas';
 
 function VisualEditor() {
-	const inlineStyles = useResizeCanvas();
+	const inlineStyles = __experimentalUseResizeCanvas();
 
 	return (
 		<BlockSelectionClearer

@@ -10,7 +10,7 @@ import { useEffect, useState } from '@wordpress/element';
  *
  * @return {Object} Inline styles to be added to resizable container.
  */
-export function useResizeCanvas() {
+export default function useResizeCanvas() {
 	const deviceType = useSelect( ( select ) => {
 		return select( 'core/editor' ).__experimentalGetPreviewDeviceType();
 	}, [] );
