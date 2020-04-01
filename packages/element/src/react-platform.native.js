@@ -36,7 +36,7 @@ const render = ( element ) => ( propsFromNative ) => {
 			'native.block_editor_props',
 			propsFromNative
 		);
-	}, [] );
+	}, [ propsFromNative ] );
 
 	if ( ! filteredProps ) {
 		return null;
