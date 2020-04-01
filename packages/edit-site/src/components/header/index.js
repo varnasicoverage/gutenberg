@@ -4,6 +4,7 @@
 import { useCallback } from '@wordpress/element';
 import { BlockNavigationDropdown, ToolSelector } from '@wordpress/block-editor';
 import { PinnedItems } from '@wordpress/interface';
+import { __experimentalPreviewOptions as PreviewOptions } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -62,6 +63,7 @@ export default function Header() {
 				<ToolSelector />
 			</div>
 			<div className="edit-site-header__actions">
+				<PreviewOptions forceShow={ true } forceViewable={ true } />
 				<SaveButton />
 				<PinnedItems.Slot scope="core/edit-site" />
 				<MoreMenu />

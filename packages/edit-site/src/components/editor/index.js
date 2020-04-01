@@ -16,11 +16,13 @@ import {
 } from '@wordpress/components';
 import { EntityProvider } from '@wordpress/core-data';
 import {
+	BlockSelectionClearer,
 	__experimentalEditorSkeleton as EditorSkeleton,
 	__experimentalFullscreenMode as FullscreenMode,
 	__unstableEditorStyles as EditorStyles,
 } from '@wordpress/block-editor';
 import { useViewportMatch } from '@wordpress/compose';
+import { __experimentalUseResizeCanvas as useResizeCanvas } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -60,6 +62,8 @@ function Editor( { settings: _settings } ) {
 		};
 	}, [] );
 
+	const inlineStyles = useResizeCanvas();
+
 	return template ? (
 		<>
 			<EditorStyles styles={ settings.styles } />
@@ -78,11 +82,13 @@ function Editor( { settings: _settings } ) {
 										sidebar={ ! isMobile && <Sidebar /> }
 										header={ <Header /> }
 										content={
-											<>
+											<BlockSelectionClearer
+												style={ inlineStyles }
+											>
 												<Notices />
 												<Popover.Slot name="block-toolbar" />
 												<BlockEditor />
-											</>
+											</BlockSelectionClearer>
 										}
 									/>
 									<Popover.Slot />

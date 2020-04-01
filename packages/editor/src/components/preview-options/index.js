@@ -38,6 +38,8 @@ const downArrow = (
 export default function PreviewOptions( {
 	forceIsAutosaveable,
 	forcePreviewLink,
+	forceShow,
+	forceViewable,
 } ) {
 	const {
 		__experimentalSetPreviewDeviceType: setPreviewDeviceType,
@@ -55,7 +57,7 @@ export default function PreviewOptions( {
 		const { getEditedPostAttribute } = select( 'core/editor' );
 		const { getPostType } = select( 'core' );
 		const postType = getPostType( getEditedPostAttribute( 'type' ) );
-		return get( postType, [ 'viewable' ], false );
+		return get( postType, [ 'viewable' ], false ) || forceViewable;
 	}, [] );
 
 	return (
@@ -68,7 +70,7 @@ export default function PreviewOptions( {
 					onClick={ onToggle }
 					className="editor-post-preview__button-toggle"
 					aria-expanded={ isOpen }
-					disabled={ ! isSaveable }
+					disabled={ ! isSaveable && ! forceShow }
 				>
 					{ __( 'Preview' ) }
 					{ downArrow }
