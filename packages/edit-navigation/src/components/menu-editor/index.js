@@ -38,7 +38,7 @@ export default function MenuEditor( { menuId, blockEditorSettings } ) {
 				<BlockEditorKeyboardShortcuts />
 				<MenuEditorShortcuts saveBlocks={ saveBlocks } />
 				<Panel className="edit-navigation-menu-editor__panel">
-					<PanelBody title={ __( 'Menu locations' ) }>
+					<PanelBody title={ __( 'Navigation structure' ) }>
 						{ !! blocks.length && (
 							<__experimentalBlockNavigationList
 								blocks={ blocks }
