@@ -86,14 +86,9 @@ export default function BlockToolbar( { hideDragHandle } ) {
 		transform: shouldShowMovers ? 'translateX(0px)' : 'translateX(100%)',
 	};
 
-	const animatedBlockParentStyles = {
-		opacity: shouldShowMovers ? 1 : 0,
-		transform: shouldShowMovers ? 'translateY(-63px)' : 'translateY(0)',
-		transitionDelay: shouldShowMovers ? 0 : 0,
-	};
-
 	const classes = classnames(
 		'block-editor-block-toolbar',
+		shouldShowMovers && 'is-showing-movers',
 		! displayHeaderToolbar && 'has-responsive-movers'
 	);
 
@@ -104,10 +99,7 @@ export default function BlockToolbar( { hideDragHandle } ) {
 				ref={ nodeRef }
 			>
 				{ ! isMultiToolbar && (
-					<div
-						className="block-editor-block-toolbar__block-parent-wrapper"
-						style={ animatedBlockParentStyles }
-					>
+					<div className="block-editor-block-toolbar__block-parent-wrapper">
 						<BlockParent clientIds={ blockClientIds } />
 					</div>
 				) }
