@@ -22,6 +22,7 @@ let blocksRegistered = false;
  * that can be registered with `AppRegistry.registerComponent`
  */
 export function initializeEditor( {
+	id,
 	initialHtml,
 	initialTitle,
 	initialHtmlModeEnabled,
@@ -35,12 +36,13 @@ export function initializeEditor( {
 	registerCoreBlocks();
 	blocksRegistered = true;
 
-	return render(
+	render(
 		<Editor
 			initialHtml={ initialHtml }
 			initialHtmlModeEnabled={ initialHtmlModeEnabled }
 			initialTitle={ initialTitle }
 			postType={ postType }
-		/>
+		/>,
+		id
 	);
 }

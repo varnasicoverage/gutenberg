@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { AppRegistry, I18nManager } from 'react-native';
+import { I18nManager } from 'react-native';
 
 /**
  * Internal dependencies
@@ -36,7 +36,8 @@ const gutenbergSetup = () => {
 	setupInitHooks();
 
 	const initializeEditor = require( '@wordpress/edit-post' ).initializeEditor;
-	return initializeEditor( {
+	initializeEditor( {
+		id: 'gutenberg',
 		initialHtml,
 		initialHtmlModeEnabled: false,
 		initialTitle: 'Welcome to Gutenberg!',
@@ -89,4 +90,4 @@ const setupLocale = ( locale, extraTranslations ) => {
 
 reactNativeSetup();
 
-AppRegistry.registerComponent( 'gutenberg', gutenbergSetup );
+gutenbergSetup();
