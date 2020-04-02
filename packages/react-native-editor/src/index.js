@@ -51,7 +51,7 @@ const setupInitHooks = () => {
 	wpHooks.doAction( 'native.setup-init-hooks' );
 
 	wpHooks.addAction( 'native.render', 'core/react-native-editor', ( props ) => {
-		setupLocale( props.locale, props.translations );
+		setupLocale( 'fr', props.translations );
 	} );
 
 	// Map native props to Editor props
@@ -89,5 +89,4 @@ const setupLocale = ( locale, extraTranslations ) => {
 };
 
 reactNativeSetup();
-
 gutenbergSetup();
