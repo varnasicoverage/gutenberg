@@ -55,8 +55,8 @@ function example() {
 		},
 		{
 			code: `
-function example() {
-	const Foo = doSomeCostlyOperation();
+function MyComponent() {
+	const Foo = getSomeComponent();
 	return <Foo />;
 }`,
 		},
