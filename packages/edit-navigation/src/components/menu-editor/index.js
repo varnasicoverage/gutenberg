@@ -7,7 +7,6 @@ import {
 	BlockList,
 	ObserveTyping,
 	WritingFlow,
-	__experimentalBlockNavigationList,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { Panel, PanelBody, Button } from '@wordpress/components';
@@ -16,6 +15,7 @@ import { Panel, PanelBody, Button } from '@wordpress/components';
  * Internal dependencies
  */
 import useNavigationBlocks from './use-navigation-blocks';
+import NavigationStructurePanel from './navigation-structure-panel';
 
 export default function MenuEditor( { menuId, blockEditorSettings } ) {
 	const [ blocks, setBlocks, saveBlocks ] = useNavigationBlocks( menuId );
@@ -34,19 +34,7 @@ export default function MenuEditor( { menuId, blockEditorSettings } ) {
 				} }
 			>
 				<BlockEditorKeyboardShortcuts />
-				<Panel className="edit-navigation-menu-editor__panel">
-					<PanelBody title={ __( 'Navigation structure' ) }>
-						{ !! blocks.length && (
-							<__experimentalBlockNavigationList
-								blocks={ blocks }
-								selectedBlockClientId={ blocks[ 0 ].clientId }
-								selectBlock={ () => {} }
-								showNestedBlocks
-								showAppender
-							/>
-						) }
-					</PanelBody>
-				</Panel>
+				<NavigationStructurePanel blocks={ blocks } />
 				<Panel
 					header={
 						<Button isPrimary onClick={ saveBlocks }>
