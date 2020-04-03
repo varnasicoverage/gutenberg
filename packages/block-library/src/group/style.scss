@@ -1,4 +1,5 @@
-.wp-block-group {
+:root .wp-block-group {
+	background: var(--wp--color--gradient);
 	background-color: var(--wp--color--background);
 	color: var(--wp--color--text);
 }

@@ -1,7 +1,10 @@
-.wp-block-media-text {
+:root .wp-block-media-text {
+	background: var(--wp--color--gradient);
 	background-color: var(--wp--color--background);
 	color: var(--wp--color--text);
+}
 
+.wp-block-media-text {
 	// This block's direction should not be manipulated by rtl, as the mediaPosition control does.
 	/*!rtl:begin:ignore*/
 	direction: ltr;
