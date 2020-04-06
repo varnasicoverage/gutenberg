@@ -2686,7 +2686,9 @@ exports[`Storyshots Components/Disabled Default 1`] = `
         Select Control
       </label>
       <select
+        aria-busy={false}
         className="components-select-control__input"
+        disabled={false}
         id="inspector-select-control-0"
         multiple={false}
         onChange={[Function]}
@@ -7677,8 +7679,10 @@ exports[`Storyshots Components/SelectControl Default 1`] = `
       Label Text
     </label>
     <select
+      aria-busy={false}
       aria-describedby="inspector-select-control-1__help"
       className="components-select-control__input"
+      disabled={false}
       id="inspector-select-control-1"
       multiple={false}
       onChange={[Function]}
@@ -9059,8 +9063,10 @@ exports[`Storyshots Components/TreeSelect Default 1`] = `
       Label Text
     </label>
     <select
+      aria-busy={false}
       aria-describedby="inspector-select-control-2__help"
       className="components-select-control__input"
+      disabled={false}
       id="inspector-select-control-2"
       multiple={false}
       onChange={[Function]}
