@@ -10,8 +10,9 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 export default function NavigationStructurePanel( { blocks } ) {
-	const selectedBlockClientIds = useSelect( ( select ) =>
-		select( 'core/block-editor' ).getSelectedBlockClientIds()
+	const blockClientIds = useSelect(
+		( select ) => select( 'core/block-editor' ).getSelectedBlockClientIds(),
+		[]
 	);
 
 	const { selectBlock } = useDispatch( 'core/block-editor' );
