@@ -21,6 +21,7 @@ import {
 } from '@wordpress/block-editor';
 import { useViewportMatch } from '@wordpress/compose';
 import { FullscreenMode, InterfaceSkeleton } from '@wordpress/interface';
+import { EntitiesSavedStates } from '@wordpress/editor';
 
 /**
  * Internal dependencies
@@ -84,6 +85,7 @@ function Editor( { settings: _settings } ) {
 												<BlockEditor />
 											</>
 										}
+										actions={ <EntitiesSavedStates /> }
 										footer={ <BlockBreadcrumb /> }
 									/>
 									<Popover.Slot />
