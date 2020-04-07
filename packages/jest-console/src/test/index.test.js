@@ -82,7 +82,7 @@ describe( 'jest-console', () => {
 			} );
 			/* eslint-enable jest/no-standalone-expect */
 
-			/* eslint-disable-next-line jest/expect-expect */
+			// eslint-disable-next-line jest/expect-expect
 			it( 'captures logging in lifecycle', () => {} );
 		} );
 	} );
