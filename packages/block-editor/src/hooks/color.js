@@ -166,7 +166,7 @@ export function ColorEdit( props ) {
 	const localAttributes = useRef( attributes );
 	useEffect( () => {
 		localAttributes.current = attributes;
-	} );
+	}, [ attributes ] );
 
 	if ( ! hasColorSupport( blockName ) ) {
 		return null;
