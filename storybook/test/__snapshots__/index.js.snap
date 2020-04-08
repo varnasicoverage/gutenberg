@@ -2580,6 +2580,7 @@ exports[`Storyshots Components/CustomSelectControl Default 1`] = `
     className="components-button components-custom-select-control__button is-small"
     id="downshift-null-toggle-button"
     onClick={[Function]}
+    onFocus={[Function]}
     onKeyDown={[Function]}
     type="button"
   >
@@ -2901,6 +2902,7 @@ exports[`Storyshots Components/FontSizePicker Default 1`] = `
         className="components-button components-custom-select-control__button is-small"
         id="downshift-null-toggle-button"
         onClick={[Function]}
+        onFocus={[Function]}
         onKeyDown={[Function]}
         type="button"
       >
@@ -3192,6 +3194,7 @@ input[type='number'].emotion-18 {
         className="components-button components-custom-select-control__button is-small"
         id="downshift-null-toggle-button"
         onClick={[Function]}
+        onFocus={[Function]}
         onKeyDown={[Function]}
         type="button"
       >
@@ -3391,6 +3394,7 @@ exports[`Storyshots Components/FontSizePicker Without Custom Sizes 1`] = `
         className="components-button components-custom-select-control__button is-small"
         id="downshift-null-toggle-button"
         onClick={[Function]}
+        onFocus={[Function]}
         onKeyDown={[Function]}
         type="button"
       >
