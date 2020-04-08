@@ -1,3 +1,10 @@
-.edit-post-visual-editor .block-library-block__reusable-block-container .block-editor-writing-flow__click-redirect {
-	min-height: auto;
+.edit-post-visual-editor .block-library-block__reusable-block-container {
+	.block-editor-writing-flow__click-redirect {
+		min-height: auto;
+	}
+
+	// Allow vertical paddings to collapse to better fit the flow.
+	.block-editor-writing-flow {
+		display: block;
+	}
 }
